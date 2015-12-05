@@ -26,3 +26,38 @@
 *.exe
 *.out
 *.app
+
+# temporary folder
+/Binaries/
+/DerivedDataCache/
+/Intermediate/
+/Saved/
+
+# Visual Studio tmp files
+*.sdf
+*.opensdf
+*.suo
+
+# -----------------------
+# Operating System Files
+
+# OSX
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+
+# Windows
+Thumbs.db
+ehthumbs.db
+*.lnk
