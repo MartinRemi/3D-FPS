@@ -1,10 +1,10 @@
 var net = require('net');
 var GameServer = require('./gameServer');
 
+var gameServ = null;
+
 var server = net.createServer(function(socket) 
 {
-	var gameServ = null;
-
 	var matchmaking = function()
 	{
 		if(gameServ == null) 
