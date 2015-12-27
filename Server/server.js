@@ -2,6 +2,7 @@ var net = require('net');
 var GameServer = require('./gameServer');
 
 var gameServ = null;
+var servers = [];
 
 var server = net.createServer(function(socket) 
 {
@@ -9,7 +10,7 @@ var server = net.createServer(function(socket)
 	{
 		if(gameServ == null) 
 			{
-				gameServ = new GameServer(4242);
+				gameServ = new GameServer("127.0.0.1", 4242);
 				console.log("\tServer created on port 4242");
 			}
 			gameServ.addPlayer();
@@ -34,7 +35,11 @@ var server = net.createServer(function(socket)
 		else if(subs === "NWSR") // NeW ServeR
 		{
 			console.log("\tNew server to register");
-			gameServ = new GameServer(parseInt(data.substring(4)));
+			gameServ = new GameServer(socket.remoteAddress, parseInt(data.substring(4)));
+		}
+		else if(subs === "UNSR")
+		{
+			console.log("\tServer unregistred");
 		}
 	};
 
@@ -43,6 +48,11 @@ var server = net.createServer(function(socket)
 		var packetData = data.toString();
 		console.log("received: " + data);
 		handleData(packetData);
+	});
+
+	socket.on('end', function()
+	{
+		console.log('disconnected');
 	});
 });
 

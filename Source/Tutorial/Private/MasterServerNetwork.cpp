@@ -3,6 +3,9 @@
 #include "Tutorial.h"
 #include "MasterServerNetwork.h"
 
+FString UMasterServerNetwork::address = TEXT("127.0.0.1");
+int32 UMasterServerNetwork::port = 1337;
+
 FString StringFromBinaryArray(const TArray<uint8>& BinaryArray)
 {
 	//Create a string from a byte array!
@@ -16,8 +19,6 @@ void UMasterServerNetwork::requestServer(FString & outIp, int32 & outPort, bool 
 {
 	FSocket* Socket = ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)->CreateSocket(NAME_Stream, TEXT("default"), false);
 
-	FString address = TEXT("127.0.0.1");
-	int32 port = 1337;
 	FIPv4Address ip;
 	FIPv4Address::Parse(address, ip);
 
@@ -79,8 +80,6 @@ void UMasterServerNetwork::registerAsServer(int32 inPort, bool & success)
 {
 	FSocket* Socket = ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)->CreateSocket(NAME_Stream, TEXT("default"), false);
 
-	FString address = TEXT("127.0.0.1");
-	int32 port = 1337;
 	FIPv4Address ip;
 	FIPv4Address::Parse(address, ip);
 
@@ -94,6 +93,36 @@ void UMasterServerNetwork::registerAsServer(int32 inPort, bool & success)
 	if (connected)
 	{
 		FString serialized = TEXT("NWSR");
+		serialized.Append(FString::FromInt(inPort));
+		TCHAR *serializedChar = serialized.GetCharArray().GetData();
+		int32 size = FCString::Strlen(serializedChar);
+		int32 sent = 0;
+
+		bool successful = Socket->Send((uint8*)TCHAR_TO_UTF8(serializedChar), size, sent);
+
+		success = successful;
+		return;
+	}
+	success = false;
+}
+
+void UMasterServerNetwork::unregister(int32 inPort, bool & success)
+{
+	FSocket* Socket = ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)->CreateSocket(NAME_Stream, TEXT("default"), false);
+
+	FIPv4Address ip;
+	FIPv4Address::Parse(address, ip);
+
+	//	TSharedRef addr = ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)->CreateInternetAddr();
+	TSharedRef<FInternetAddr> addr = ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)->CreateInternetAddr();
+
+	addr->SetIp(ip.GetValue());
+	addr->SetPort(port);
+
+	bool connected = Socket->Connect(*addr);
+	if (connected)
+	{
+		FString serialized = TEXT("UNSR");
 		serialized.Append(FString::FromInt(inPort));
 		TCHAR *serializedChar = serialized.GetCharArray().GetData();
 		int32 size = FCString::Strlen(serializedChar);

@@ -14,6 +14,10 @@ UCLASS()
 class TUTORIAL_API UMasterServerNetwork : public UBlueprintFunctionLibrary
 {
 	GENERATED_BODY()
+
+private:
+	static FString address;
+	static int32 port;
 	
 public:
 	UFUNCTION(BlueprintCallable, Category = "MasterServer")
@@ -21,4 +25,7 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "MasterServer")
 		static void registerAsServer(int32 port, bool & success);
+
+	UFUNCTION(BlueprintCallable, Category = "MasterServer")
+		static void unregister(int32 port, bool & success);
 };
