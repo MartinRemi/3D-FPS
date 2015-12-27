@@ -8,17 +8,18 @@ var server = net.createServer(function(socket)
 {
 	var matchmaking = function()
 	{
-		if(gameServ == null) 
-			{
-				gameServ = new GameServer("127.0.0.1", 4242);
-				console.log("\tServer created on port 4242");
-			}
-			gameServ.addPlayer();
+		if(servers.length == 0) 
+		{
+			servers.push(new GameServer("127.0.0.1", 4242));
+			console.log("\tServer created on port 4242");
+		}
+		servers[0].addPlayer(); // FIX
 	};
 
 	var answerClient = function()
 	{
-		var message = socket.localAddress + " " + gameServ.getPort();
+		// FIX
+		var message = servers[0].getIP() + " " + servers[0].getPort();
 		socket.write(message);
 		console.log("\tAnsered: " + message);
 	}
@@ -35,7 +36,7 @@ var server = net.createServer(function(socket)
 		else if(subs === "NWSR") // NeW ServeR
 		{
 			console.log("\tNew server to register");
-			gameServ = new GameServer(socket.remoteAddress, parseInt(data.substring(4)));
+			servers.push(new GameServer(socket.remoteAddress, parseInt(data.substring(4))));
 		}
 		else if(subs === "UNSR")
 		{
