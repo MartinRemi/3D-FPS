@@ -12,7 +12,7 @@ FString StringFromBinaryArray(const TArray<uint8>& BinaryArray)
 	return FString(cstr.c_str());
 }
 
-void UMasterServerNetwork::requestServer(FString & outIp, int32 & outPort)
+void UMasterServerNetwork::requestServer(FString & outIp, int32 & outPort, bool & success)
 {
 	FSocket* Socket = ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)->CreateSocket(NAME_Stream, TEXT("default"), false);
 
@@ -29,36 +29,53 @@ void UMasterServerNetwork::requestServer(FString & outIp, int32 & outPort)
 
 	bool connected = Socket->Connect(*addr);
 
-	FString serialized = TEXT("CLRS1");
-	TCHAR *serializedChar = serialized.GetCharArray().GetData();
-	int32 size = FCString::Strlen(serializedChar);
-	int32 sent = 0;
-
-	bool successful = Socket->Send((uint8*)TCHAR_TO_UTF8(serializedChar), size, sent);
-
-	uint32 receivedSize;
-	while (!Socket->HasPendingData(receivedSize));
-	TArray<uint8> ReceivedData;
-	ReceivedData.Init(receivedSize);
-	int32 Read = 0;
-	Socket->Recv(ReceivedData.GetData(), ReceivedData.Num(), Read);
-
-	// TODO: Maybe check if correct values?
-	FString tempMessage = StringFromBinaryArray(ReceivedData);
-	FString tempPort;
-	if (!tempMessage.Split(" ", &outIp, &tempPort))
+	if (connected)
 	{
-		outIp = "";
-		outPort = -1;
+		FString serialized = TEXT("CLRS1");
+		TCHAR *serializedChar = serialized.GetCharArray().GetData();
+		int32 size = FCString::Strlen(serializedChar);
+		int32 sent = 0;
+
+		bool successful = Socket->Send((uint8*)TCHAR_TO_UTF8(serializedChar), size, sent);
+
+		if (successful)
+		{
+			uint32 receivedSize;
+			int i = 0;
+			while (!Socket->HasPendingData(receivedSize) && i < 10) // TODO: FIXME
+			{
+				FPlatformProcess::Sleep(0.1);
+				++i;
+			}
+			TArray<uint8> ReceivedData;
+			ReceivedData.Init(receivedSize);
+			int32 Read = 0;
+			Socket->Recv(ReceivedData.GetData(), ReceivedData.Num(), Read);
+
+			// TODO: Maybe check if correct values?
+			FString tempMessage = StringFromBinaryArray(ReceivedData);
+			FString tempPort;
+			if (!tempMessage.Split(" ", &outIp, &tempPort))
+			{
+				outIp = "";
+				outPort = -1;
+				success = false;
+			}
+			else
+			{
+				outPort = FCString::Atoi(*tempPort);
+				success = true;
+			}
+		}
+		else
+			success = false;
+		Socket->Close();
 	}
 	else
-	{
-		outPort = FCString::Atoi(*tempPort);
-	}
-	Socket->Close();
+		success = false;
 }
 
-void UMasterServerNetwork::registerHasServer(int32 inPort)
+void UMasterServerNetwork::registerAsServer(int32 inPort, bool & success)
 {
 	FSocket* Socket = ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)->CreateSocket(NAME_Stream, TEXT("default"), false);
 
@@ -74,14 +91,20 @@ void UMasterServerNetwork::registerHasServer(int32 inPort)
 	addr->SetPort(port);
 
 	bool connected = Socket->Connect(*addr);
+	if (connected)
+	{
+		FString serialized = TEXT("NWSR");
+		serialized.Append(FString::FromInt(inPort));
+		TCHAR *serializedChar = serialized.GetCharArray().GetData();
+		int32 size = FCString::Strlen(serializedChar);
+		int32 sent = 0;
 
-	FString serialized = TEXT("NWSR");
-	serialized.Append(FString::FromInt(inPort));
-	TCHAR *serializedChar = serialized.GetCharArray().GetData();
-	int32 size = FCString::Strlen(serializedChar);
-	int32 sent = 0;
+		bool successful = Socket->Send((uint8*)TCHAR_TO_UTF8(serializedChar), size, sent);
 
-	bool successful = Socket->Send((uint8*)TCHAR_TO_UTF8(serializedChar), size, sent);
+		success = successful;
+		return;
+	}
+	success = false;
 }
 
 

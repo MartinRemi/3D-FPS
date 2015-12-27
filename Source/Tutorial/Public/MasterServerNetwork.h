@@ -17,8 +17,8 @@ class TUTORIAL_API UMasterServerNetwork : public UBlueprintFunctionLibrary
 	
 public:
 	UFUNCTION(BlueprintCallable, Category = "MasterServer")
-		static void requestServer(FString & ip, int32 & port);
+		static void requestServer(FString & ip, int32 & port, bool & success);
 
 	UFUNCTION(BlueprintCallable, Category = "MasterServer")
-		static void registerHasServer(int32 port);
+		static void registerAsServer(int32 port, bool & success);
 };
