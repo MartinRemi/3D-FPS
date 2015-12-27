@@ -7,6 +7,12 @@ module.exports = function GameServer(serverIP, serverPort)
 	this.addPlayer = function()
 	{
 		++numberOfPlayers;
+		console.log(numberOfPlayers);
+	};
+
+	this.getNumberOfPlayers = function()
+	{
+		return numberOfPlayers;
 	};
 
 	this.getPort = function()

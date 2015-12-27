@@ -1,25 +1,38 @@
+const MAX_NUMBER_OF_PLAYERS = 2;
+
 var net = require('net');
 var GameServer = require('./gameServer');
 
-var gameServ = null;
 var servers = [];
 
 var server = net.createServer(function(socket) 
 {
 	var matchmaking = function()
 	{
-		if(servers.length == 0) 
+		var matchingServer = -1;
+		for(var i = 0; i < servers.length; ++i)
+		{
+			if(servers[i].getNumberOfPlayers() < MAX_NUMBER_OF_PLAYERS)
+			{
+				matchingServer = i;
+				console.log("\tServer found");
+				break;
+			}
+		}
+		if(servers.length === 0 || matchingServer == -1) 
 		{
 			servers.push(new GameServer("127.0.0.1", 4242));
 			console.log("\tServer created on port 4242");
+			matchingServer = servers.length - 1;
 		}
-		servers[0].addPlayer(); // FIX
+		servers[matchingServer].addPlayer(); // FIX
+		return matchingServer;
 	};
 
-	var answerClient = function()
+	var answerClient = function(serv)
 	{
 		// FIX
-		var message = servers[0].getIP() + " " + servers[0].getPort();
+		var message = servers[serv].getIP() + " " + servers[serv].getPort();
 		socket.write(message);
 		console.log("\tAnsered: " + message);
 	}
@@ -30,8 +43,7 @@ var server = net.createServer(function(socket)
 		if(subs === "CLRS") // CLient Request Server
 		{
 			console.log("\tUser request server");
-			matchmaking();
-			answerClient();
+			answerClient(matchmaking());
 		}
 		else if(subs === "NWSR") // NeW ServeR
 		{
