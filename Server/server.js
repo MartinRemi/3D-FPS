@@ -53,6 +53,15 @@ var server = net.createServer(function(socket)
 		else if(subs === "UNSR")
 		{
 			console.log("\tServer unregistred");
+			var portToClose = parseInt(data.substring(4));
+			for(var i = 0; i < servers.length; ++i)
+			{
+				if(servers[i].getIP() == socket.remoteAddress && servers[i].getPort() == portToClose)
+				{
+					delete servers[i];
+					break;
+				}
+			}
 		}
 	};
 
@@ -61,11 +70,6 @@ var server = net.createServer(function(socket)
 		var packetData = data.toString();
 		console.log("received: " + data);
 		handleData(packetData);
-	});
-
-	socket.on('end', function()
-	{
-		console.log('disconnected');
 	});
 });
 
