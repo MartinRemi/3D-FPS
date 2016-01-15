@@ -7,7 +7,9 @@
 // Sets default values
 AWeapon::AWeapon() :
 	SocketWeaponMuzzle(TEXT("weapon_projectile")),
-	FireRate(1.0f)
+	FireRate(1.0f),
+	Accuracy(1.f),
+	MagazineNumber(1)
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;

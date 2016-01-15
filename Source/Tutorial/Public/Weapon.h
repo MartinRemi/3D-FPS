@@ -35,12 +35,29 @@ protected:
 		float FireRate;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+		float Damage;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+		float Accuracy;
+
+	/** magazine size */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+		int32 AmmoMax;
+
+	/** number of time you can reload */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+		 int32 MagazineNumber;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+		float ReloadSpeed;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 		UParticleSystem* ParticleFire;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 		USoundCue* SoundFire;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-		int32 AmmoMax;
+		TSubclassOf<AActor> BulletClass;
 
 };
