@@ -58,7 +58,7 @@ var server = net.createServer(function(socket)
 			{
 				if(servers[i].getIP() == socket.remoteAddress && servers[i].getPort() == portToClose)
 				{
-					delete servers[i];
+					delete servers.slice(i, 1);
 					break;
 				}
 			}
