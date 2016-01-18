@@ -20,12 +20,9 @@ void UMasterServerNetwork::requestServer(FString & outIp, int32 & outPort, bool 
 	FSocket* Socket = NULL;
 	if (connectToMasterServer(Socket))
 	{
-		FString serialized = TEXT("CLRS1");
-		TCHAR *serializedChar = serialized.GetCharArray().GetData();
-		int32 size = FCString::Strlen(serializedChar);
-		int32 sent = 0;
+		FString message = TEXT("CLRS1");
 
-		bool successful = Socket->Send((uint8*)TCHAR_TO_UTF8(serializedChar), size, sent);
+		bool successful = sendMessage(Socket, message);
 
 		if (successful)
 		{
