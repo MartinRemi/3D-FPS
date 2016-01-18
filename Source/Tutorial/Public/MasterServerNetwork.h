@@ -28,4 +28,8 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "MasterServer")
 		static void unregister(int32 port, bool & success);
+
+	static bool connectToMasterServer(FSocket* & socket);
+
+	static bool sendMessage(FSocket* Socket, FString & message);
 };
