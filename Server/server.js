@@ -39,21 +39,21 @@ var server = net.createServer(function(socket)
 
 	var handleData = function(data)
 	{
-		var subs = data.substring(0, 4);
-		if(subs === "CLRS") // CLient Request Server
+		var jsonData = JSON.parse(data);
+		if(jsonData["message_type"] === "CLRS") // CLient Request Server
 		{
 			console.log("\tUser request server");
 			answerClient(matchmaking());
 		}
-		else if(subs === "NWSR") // NeW ServeR
+		else if(jsonData["message_type"] === "NWSR") // NeW ServeR
 		{
 			console.log("\tNew server to register");
-			servers.push(new GameServer(socket.remoteAddress, parseInt(data.substring(4))));
+			servers.push(new GameServer(socket.remoteAddress, parseInt(jsonData["port_number"])));
 		}
-		else if(subs === "UNSR")
+		else if(jsonData["message_type"] === "UNSR")
 		{
 			console.log("\tServer unregistred");
-			var portToClose = parseInt(data.substring(4));
+			var portToClose = parseInt(jsonData["port_number"]);
 			for(var i = 0; i < servers.length; ++i)
 			{
 				if(servers[i].getIP() == socket.remoteAddress && servers[i].getPort() == portToClose)

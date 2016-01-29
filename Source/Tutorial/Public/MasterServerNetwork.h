@@ -4,6 +4,7 @@
 
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "Networking.h"
+#include "json.h"
 #include <string>
 #include "MasterServerNetwork.generated.h"
 
@@ -31,5 +32,5 @@ public:
 
 	static bool connectToMasterServer(FSocket* & socket);
 
-	static bool sendMessage(FSocket* Socket, FString & message);
+	static bool sendMessage(FSocket* Socket, json::Object & jobj);
 };

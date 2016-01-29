@@ -20,7 +20,9 @@ void UMasterServerNetwork::requestServer(FString & outIp, int32 & outPort, bool 
 	FSocket* Socket = NULL;
 	if (connectToMasterServer(Socket))
 	{
-		FString message = TEXT("CLRS1");
+		json::Object message;
+		message["message_type"] = "CLRS";
+		message["number_of_players"] = 1; // Hard coded
 
 		bool successful = sendMessage(Socket, message);
 
@@ -66,9 +68,10 @@ void UMasterServerNetwork::registerAsServer(int32 inPort, bool & success)
 	FSocket* Socket = NULL;
 	if (connectToMasterServer(Socket))
 	{
-		FString message = TEXT("NWSR");
-		message.Append(FString::FromInt(inPort));
-		
+		json::Object message;
+		message["message_type"] = "NWSR";
+		message["port_number"] = inPort;
+
 		success = sendMessage(Socket, message);
 		return;
 	}
@@ -80,8 +83,9 @@ void UMasterServerNetwork::unregister(int32 inPort, bool & success)
 	FSocket* Socket = NULL;
 	if (connectToMasterServer(Socket))
 	{
-		FString message = TEXT("UNSR");
-		message.Append(FString::FromInt(inPort));
+		json::Object message;
+		message["message_type"] = "UNSR";
+		message["port_number"] = inPort;
 
 		success = sendMessage(Socket, message);
 		return;
@@ -105,8 +109,10 @@ bool UMasterServerNetwork::connectToMasterServer(FSocket* & Socket)
 	return Socket->Connect(*addr);
 }
 
-bool UMasterServerNetwork::sendMessage(FSocket* Socket, FString & message)
+bool UMasterServerNetwork::sendMessage(FSocket* Socket, json::Object & jobj)
 {
+	std::string serialization = json::Serialize(jobj);
+	FString message(serialization.c_str());
 	TCHAR *serializedChar = message.GetCharArray().GetData();
 	int32 size = FCString::Strlen(serializedChar);
 	int32 sent = 0;
