@@ -42,17 +42,20 @@ void UMasterServerNetwork::requestServer(FString & outIp, int32 & outPort, bool 
 
 			// TODO: Maybe check if correct values?
 			FString tempMessage = StringFromBinaryArray(ReceivedData);
-			FString tempPort;
-			if (!tempMessage.Split(" ", &outIp, &tempPort))
+			std::string tempStringMessage(TCHAR_TO_UTF8(*tempMessage));
+			json::Value jsonMessage = json::Deserialize(tempStringMessage);
+			if (jsonMessage.GetType() == json::ObjectVal)
+			{
+				json::Object objectMessage = jsonMessage.ToObject();
+				outIp = FString(objectMessage["server_ip"].ToString().c_str());
+				outPort = objectMessage["server_port"].ToInt();
+				success = true;
+			}
+			else
 			{
 				outIp = "";
 				outPort = -1;
 				success = false;
-			}
-			else
-			{
-				outPort = FCString::Atoi(*tempPort);
-				success = true;
 			}
 		}
 		else

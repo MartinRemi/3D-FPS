@@ -32,7 +32,11 @@ var server = net.createServer(function(socket)
 	var answerClient = function(serv)
 	{
 		// FIX
-		var message = servers[serv].getIP() + " " + servers[serv].getPort();
+		var jsonMessage = {};
+		jsonMessage["message_type"] = "SRAV"; // Server available
+		jsonMessage["server_ip"] = servers[serv].getIP();
+		jsonMessage["server_port"] = servers[serv].getPort();
+		var message = JSON.stringify(jsonMessage);
 		socket.write(message);
 		console.log("\tAnsered: " + message);
 	}
