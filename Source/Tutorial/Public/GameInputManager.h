@@ -22,6 +22,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "GameInputManager")
 	static void saveScreenModeToConfig(FString screenMode);
 
+	UFUNCTION(BlueprintCallable, Category = "GameInputManager")
+	static void getResolutionFromConfig(FString & resolution);
+
 	static UGameUserSettings* GetGameUserSettings();
 	
 };

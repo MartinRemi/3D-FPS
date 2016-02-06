@@ -31,6 +31,17 @@ void UGameInputManager::saveScreenModeToConfig(FString screenMode)
 	Settings->SaveSettings();
 }
 
+void UGameInputManager::getResolutionFromConfig(FString & resolution)
+{
+	UGameUserSettings* Settings = GetGameUserSettings();
+	if (!Settings)
+	{
+		exit(-42);
+	}
+	FIntPoint res = Settings->GetLastConfirmedScreenResolution();
+	resolution = FString::FromInt(res.X) + "x" + FString::FromInt(res.Y);
+}
+
 UGameUserSettings* UGameInputManager::GetGameUserSettings()
 {
 	if (GEngine != nullptr)
