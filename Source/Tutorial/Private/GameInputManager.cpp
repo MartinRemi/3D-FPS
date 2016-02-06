@@ -19,6 +19,18 @@ void UGameInputManager::saveResolutionToConfig(FString resolution)
 	Settings->SaveSettings();
 }
 
+void UGameInputManager::saveScreenModeToConfig(FString screenMode)
+{
+	UGameUserSettings* Settings = GetGameUserSettings();
+	if (!Settings)
+	{
+		exit(-42);
+	}
+	Settings->SetFullscreenMode(screenMode != "w" ? EWindowMode::Fullscreen : EWindowMode::Windowed);
+	Settings->ConfirmVideoMode();
+	Settings->SaveSettings();
+}
+
 UGameUserSettings* UGameInputManager::GetGameUserSettings()
 {
 	if (GEngine != nullptr)
