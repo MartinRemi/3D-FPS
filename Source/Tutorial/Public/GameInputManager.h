@@ -25,6 +25,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "GameInputManager")
 	static void getResolutionFromConfig(FString & resolution);
 
+	UFUNCTION(BlueprintCallable, Category = "GameInputManager")
+	static void getAvailableResolutions(TArray<FString>& resolutions, bool & success);
+
 	static UGameUserSettings* GetGameUserSettings();
 	
 };

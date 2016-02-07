@@ -6,7 +6,7 @@ public class Tutorial : ModuleRules
 {
 	public Tutorial(TargetInfo Target)
 	{
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "Sockets", "Networking" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "Sockets", "Networking", "RHI" });
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 

@@ -42,6 +42,25 @@ void UGameInputManager::getResolutionFromConfig(FString & resolution)
 	resolution = FString::FromInt(res.X) + "x" + FString::FromInt(res.Y);
 }
 
+void UGameInputManager::getAvailableResolutions(TArray<FString>& resolutions, bool & success)
+{
+	FScreenResolutionArray ResolutionsArray;
+
+	if (RHIGetAvailableResolutions(ResolutionsArray, true))  // "RHI" dependency
+	{
+		for (const FScreenResolutionRHI& Resolution : ResolutionsArray)
+		{
+			FString StrW = FString::FromInt(Resolution.Width);
+			FString StrH = FString::FromInt(Resolution.Height);
+			resolutions.AddUnique(StrW + "x" + StrH);
+		}
+
+		success = true;
+		return;
+	}
+	success = false;
+}
+
 UGameUserSettings* UGameInputManager::GetGameUserSettings()
 {
 	if (GEngine != nullptr)
