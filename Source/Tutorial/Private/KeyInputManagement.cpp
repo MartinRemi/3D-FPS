@@ -23,6 +23,11 @@ void UKeyInputManagement::changeInput(APlayerController * pController, FKey newK
 	}
 	pController->PlayerInput->AddAxisMapping(keyMap);
 	pController->PlayerInput->SaveConfig();
+
+	const UInputSettings* InputSettings = GetDefault<UInputSettings>();
+//	((UInputSettings*)InputSettings)->AddAxisMapping(keyMap);
+	((UInputSettings*)InputSettings)->SaveKeyMappings();
+
 	//InputSettings->Mapping
 }
 
