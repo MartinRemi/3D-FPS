@@ -6,9 +6,11 @@
 #include "Runtime/CoreUObject/Public/UObject/UObjectGlobals.h"
 #include "KeyInputManagement.h"
 
-void UKeyInputManagement::changeInput(APlayerController * pController, FKey newKey, FName actionName)
+void UKeyInputManagement::changeInput(APlayerController * pController, FKey newKey, FName actionName, bool invert)
 {
-	FInputAxisKeyMapping keyMap(actionName, newKey);
+	float scale = (invert) ? -1.0f : 1.0f;
+
+	FInputAxisKeyMapping keyMap(actionName, newKey, scale);
 	const UInputSettings* InputSettings = GetDefault<UInputSettings>();
 
 	auto it = pController->PlayerInput->AxisMappings.CreateIterator();

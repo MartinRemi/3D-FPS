@@ -15,6 +15,6 @@ class TUTORIAL_API UKeyInputManagement : public UBlueprintFunctionLibrary
 	
 public:
 	UFUNCTION(BlueprintCallable, Category = "Input")
-		static void changeInput(APlayerController * pController, FKey newKey, FName actionName);
+		static void changeInput(APlayerController * pController, FKey newKey, FName actionName, bool invert = false);
 	
 };
