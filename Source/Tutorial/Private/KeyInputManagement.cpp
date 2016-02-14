@@ -9,26 +9,20 @@
 void UKeyInputManagement::changeInput(APlayerController * pController, FKey newKey, FName actionName)
 {
 	FInputAxisKeyMapping keyMap(actionName, newKey);
-	//const UInputSettings* InputSettings = GetDefault<UInputSettings>();
-	//((UInputSettings*)InputSettings)->AddAxisMapping(keyMap);
-	//((UInputSettings*)InputSettings)->SaveKeyMappings();
+	const UInputSettings* InputSettings = GetDefault<UInputSettings>();
+
 	auto it = pController->PlayerInput->AxisMappings.CreateIterator();
 	while(it)
 	{
 		if (it->Key == newKey)
 		{
-			pController->PlayerInput->AxisMappings.RemoveAt(it.GetIndex());
+			((UInputSettings*)InputSettings)->AxisMappings.Remove(*it);
 		}
 		++it;
 	}
-	pController->PlayerInput->AddAxisMapping(keyMap);
-	pController->PlayerInput->SaveConfig();
 
-	const UInputSettings* InputSettings = GetDefault<UInputSettings>();
-//	((UInputSettings*)InputSettings)->AddAxisMapping(keyMap);
+	((UInputSettings*)InputSettings)->AddAxisMapping(keyMap);
 	((UInputSettings*)InputSettings)->SaveKeyMappings();
-
-	//InputSettings->Mapping
 }
 
 
