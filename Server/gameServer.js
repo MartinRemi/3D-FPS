@@ -7,7 +7,6 @@ module.exports = function GameServer(serverIP, serverPort)
 	this.addPlayer = function()
 	{
 		++numberOfPlayers;
-		console.log(numberOfPlayers);
 	};
 
 	this.getNumberOfPlayers = function()
@@ -23,5 +22,15 @@ module.exports = function GameServer(serverIP, serverPort)
 	this.getIP = function()
 	{
 		return ip;
+	}
+	
+	this.toJSON = function()
+	{
+		obj = {
+			"port" : port,
+			"ip" : ip,
+			"numberOfPlayers" : numberOfPlayers,
+		};
+		return obj;
 	}
 }
