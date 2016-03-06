@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BuildReceipt xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Properties>
+    <Property Name="TargetName" Value="TutorialServer" />
+    <Property Name="Platform" Value="Win64" />
+    <Property Name="Configuration" Value="Development" />
+    <Property Name="Precompile" Value="False" />
+  </Properties>
+  <BuildProducts>
+    <BuildProduct Path="$(ProjectDir)\Binaries\Win64\TutorialServer.exe" Type="Executable" />
+    <BuildProduct Path="$(ProjectDir)\Binaries\Win64\TutorialServer.pdb" Type="SymbolFile" />
+    <BuildProduct Path="$(EngineDir)\Plugins\2D\Paper2D\Binaries\Win64\TutorialServer-Paper2D.lib" Type="StaticLibrary" />
+    <BuildProduct Path="$(EngineDir)\Plugins\Blendables\LightPropagationVolume\Binaries\Win64\TutorialServer-LightPropagationVolumeRuntime.lib" Type="StaticLibrary" />
+    <BuildProduct Path="$(EngineDir)\Plugins\Experimental\CharacterAI\Binaries\Win64\TutorialServer-CharacterAI.lib" Type="StaticLibrary" />
+    <BuildProduct Path="$(EngineDir)\Plugins\Experimental\HTML5Networking\Binaries\Win64\TutorialServer-HTML5Networking.lib" Type="StaticLibrary" />
+    <BuildProduct Path="$(EngineDir)\Plugins\Media\WmfMedia\Binaries\Win64\TutorialServer-WmfMedia.lib" Type="StaticLibrary" />
+    <BuildProduct Path="$(EngineDir)\Plugins\Messaging\UdpMessaging\Binaries\Win64\TutorialServer-UdpMessaging.lib" Type="StaticLibrary" />
+    <BuildProduct Path="$(EngineDir)\Plugins\Runtime\ArchVisCharacter\Binaries\Win64\TutorialServer-ArchVisCharacter.lib" Type="StaticLibrary" />
+    <BuildProduct Path="$(EngineDir)\Plugins\Runtime\CableComponent\Binaries\Win64\TutorialServer-CableComponent.lib" Type="StaticLibrary" />
+    <BuildProduct Path="$(EngineDir)\Plugins\Runtime\CustomMeshComponent\Binaries\Win64\TutorialServer-CustomMeshComponent.lib" Type="StaticLibrary" />
+    <BuildProduct Path="$(EngineDir)\Plugins\Runtime\ExampleDeviceProfileSelector\Binaries\Win64\TutorialServer-ExampleDeviceProfileSelector.lib" Type="StaticLibrary" />
+    <BuildProduct Path="$(EngineDir)\Plugins\Runtime\LeapMotionController\Binaries\Win64\TutorialServer-LeapMotionController.lib" Type="StaticLibrary" />
+    <BuildProduct Path="$(EngineDir)\Plugins\Runtime\OculusInput\Binaries\Win64\TutorialServer-OculusInput.lib" Type="StaticLibrary" />
+    <BuildProduct Path="$(EngineDir)\Plugins\Runtime\OculusLibrary\Binaries\Win64\TutorialServer-OculusLibrary.lib" Type="StaticLibrary" />
+    <BuildProduct Path="$(EngineDir)\Plugins\Runtime\OculusRift\Binaries\Win64\TutorialServer-OculusRift.lib" Type="StaticLibrary" />
+    <BuildProduct Path="$(EngineDir)\Plugins\Runtime\ProceduralMeshComponent\Binaries\Win64\TutorialServer-ProceduralMeshComponent.lib" Type="StaticLibrary" />
+    <BuildProduct Path="$(EngineDir)\Plugins\Runtime\Steam\SteamVR\Binaries\Win64\TutorialServer-SteamVR.lib" Type="StaticLibrary" />
+    <BuildProduct Path="$(EngineDir)\Plugins\Runtime\Steam\SteamVR\Binaries\Win64\TutorialServer-SteamVRController.lib" Type="StaticLibrary" />
+    <BuildProduct Path="$(EngineDir)\Plugins\Runtime\WindowsMoviePlayer\Binaries\Win64\TutorialServer-WindowsMoviePlayer.lib" Type="StaticLibrary" />
+    <BuildProduct Path="$(EngineDir)\Plugins\Slate\SlateRemote\Binaries\Win64\TutorialServer-SlateRemote.lib" Type="StaticLibrary" />
+  </BuildProducts>
+  <RuntimeDependencies>
+    <RuntimeDependency Path="$(EngineDir)/Binaries/ThirdParty/PhysX/PhysX-3.3/Win64/VS2015/PhysX3PROFILE_x64.dll" />
+    <RuntimeDependency Path="$(EngineDir)/Binaries/ThirdParty/PhysX/PhysX-3.3/Win64/VS2015/PhysX3CommonPROFILE_x64.dll" />
+    <RuntimeDependency Path="$(EngineDir)/Binaries/ThirdParty/PhysX/PhysX-3.3/Win64/VS2015/PhysX3CookingPROFILE_x64.dll" />
+    <RuntimeDependency Path="$(EngineDir)/Binaries/ThirdParty/PhysX/PhysX-3.3/Win64/VS2015/nvToolsExt64_1.dll" />
+    <RuntimeDependency Path="$(EngineDir)/Binaries/ThirdParty/PhysX/APEX-1.3/Win64/VS2015/APEX_ClothingPROFILE_x64.dll" />
+    <RuntimeDependency Path="$(EngineDir)/Binaries/ThirdParty/PhysX/APEX-1.3/Win64/VS2015/APEX_DestructiblePROFILE_x64.dll" />
+    <RuntimeDependency Path="$(EngineDir)/Binaries/ThirdParty/PhysX/APEX-1.3/Win64/VS2015/APEX_LegacyPROFILE_x64.dll" />
+    <RuntimeDependency Path="$(EngineDir)/Binaries/ThirdParty/PhysX/APEX-1.3/Win64/VS2015/ApexFrameworkPROFILE_x64.dll" />
+    <RuntimeDependency Path="$(EngineDir)/Binaries/ThirdParty/Ogg/Win64/VS2015/libogg_64.dll" />
+    <RuntimeDependency Path="$(EngineDir)/Binaries/ThirdParty/Vorbis/Win64/VS2015/libvorbis_64.dll" />
+    <RuntimeDependency Path="$(EngineDir)/Binaries/ThirdParty/Vorbis/Win64/VS2015/libvorbisfile_64.dll" />
+    <RuntimeDependency Path="$(EngineDir)/Binaries/ThirdParty/Leap/Win64/Leap.dll" />
+    <RuntimeDependency Path="$(EngineDir)/Binaries/ThirdParty/OpenVR/OpenVRv000/Win64/openvr_api.dll" />
+  </RuntimeDependencies>
+  <AdditionalProperties />
+  <bRequireDependenciesToExist>true</bRequireDependenciesToExist>
+</BuildReceipt>

@@ -9,6 +9,25 @@
   <BuildProducts>
     <BuildProduct Path="$(ProjectDir)\Binaries\Win64\Tutorial.exe" Type="Executable" />
     <BuildProduct Path="$(ProjectDir)\Binaries\Win64\Tutorial.pdb" Type="SymbolFile" />
+    <BuildProduct Path="$(EngineDir)\Plugins\2D\Paper2D\Binaries\Win64\Tutorial-Paper2D.lib" Type="StaticLibrary" />
+    <BuildProduct Path="$(EngineDir)\Plugins\Blendables\LightPropagationVolume\Binaries\Win64\Tutorial-LightPropagationVolumeRuntime.lib" Type="StaticLibrary" />
+    <BuildProduct Path="$(EngineDir)\Plugins\Experimental\CharacterAI\Binaries\Win64\Tutorial-CharacterAI.lib" Type="StaticLibrary" />
+    <BuildProduct Path="$(EngineDir)\Plugins\Experimental\HTML5Networking\Binaries\Win64\Tutorial-HTML5Networking.lib" Type="StaticLibrary" />
+    <BuildProduct Path="$(EngineDir)\Plugins\Media\WmfMedia\Binaries\Win64\Tutorial-WmfMedia.lib" Type="StaticLibrary" />
+    <BuildProduct Path="$(EngineDir)\Plugins\Messaging\UdpMessaging\Binaries\Win64\Tutorial-UdpMessaging.lib" Type="StaticLibrary" />
+    <BuildProduct Path="$(EngineDir)\Plugins\Runtime\ArchVisCharacter\Binaries\Win64\Tutorial-ArchVisCharacter.lib" Type="StaticLibrary" />
+    <BuildProduct Path="$(EngineDir)\Plugins\Runtime\CableComponent\Binaries\Win64\Tutorial-CableComponent.lib" Type="StaticLibrary" />
+    <BuildProduct Path="$(EngineDir)\Plugins\Runtime\CustomMeshComponent\Binaries\Win64\Tutorial-CustomMeshComponent.lib" Type="StaticLibrary" />
+    <BuildProduct Path="$(EngineDir)\Plugins\Runtime\ExampleDeviceProfileSelector\Binaries\Win64\Tutorial-ExampleDeviceProfileSelector.lib" Type="StaticLibrary" />
+    <BuildProduct Path="$(EngineDir)\Plugins\Runtime\LeapMotionController\Binaries\Win64\Tutorial-LeapMotionController.lib" Type="StaticLibrary" />
+    <BuildProduct Path="$(EngineDir)\Plugins\Runtime\OculusInput\Binaries\Win64\Tutorial-OculusInput.lib" Type="StaticLibrary" />
+    <BuildProduct Path="$(EngineDir)\Plugins\Runtime\OculusLibrary\Binaries\Win64\Tutorial-OculusLibrary.lib" Type="StaticLibrary" />
+    <BuildProduct Path="$(EngineDir)\Plugins\Runtime\OculusRift\Binaries\Win64\Tutorial-OculusRift.lib" Type="StaticLibrary" />
+    <BuildProduct Path="$(EngineDir)\Plugins\Runtime\ProceduralMeshComponent\Binaries\Win64\Tutorial-ProceduralMeshComponent.lib" Type="StaticLibrary" />
+    <BuildProduct Path="$(EngineDir)\Plugins\Runtime\Steam\SteamVR\Binaries\Win64\Tutorial-SteamVR.lib" Type="StaticLibrary" />
+    <BuildProduct Path="$(EngineDir)\Plugins\Runtime\Steam\SteamVR\Binaries\Win64\Tutorial-SteamVRController.lib" Type="StaticLibrary" />
+    <BuildProduct Path="$(EngineDir)\Plugins\Runtime\WindowsMoviePlayer\Binaries\Win64\Tutorial-WindowsMoviePlayer.lib" Type="StaticLibrary" />
+    <BuildProduct Path="$(EngineDir)\Plugins\Slate\SlateRemote\Binaries\Win64\Tutorial-SlateRemote.lib" Type="StaticLibrary" />
   </BuildProducts>
   <RuntimeDependencies>
     <RuntimeDependency Path="$(EngineDir)/Binaries/ThirdParty/PhysX/PhysX-3.3/Win64/VS2015/PhysX3PROFILE_x64.dll" />
