@@ -1,5 +1,7 @@
 # Assets
 /Content/InfinityBladeIceLands/
+/Content/MapAssets/
+/Content/Maps/Map1.umap
 
 # Compiled Object files
 *.slo
@@ -40,6 +42,9 @@
 *.sdf
 *.opensdf
 *.suo
+
+# Other
+.svn/
 
 # -----------------------
 # Operating System Files
